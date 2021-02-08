@@ -1,12 +1,12 @@
 <template>
   <div class="home">
-    2222222222
+    详情
   </div>
 </template>
 
 <script lang="ts">
 export default {
-  name: 'Home'
+  name: 'Detail'
 }
 </script>
 
