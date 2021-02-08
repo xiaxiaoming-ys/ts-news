@@ -13,7 +13,6 @@ axios.interceptors.request.use(
 // 响应拦截器 拦截状态码 
 axios.interceptors.response.use(
   (res: AxiosResponse) => {
-    console.log(res)
     // 可根据状态码跳转
     if (res.data.err === 1) {
       return Promise.reject(res.data.data)

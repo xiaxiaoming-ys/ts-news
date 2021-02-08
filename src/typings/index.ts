@@ -1,5 +1,7 @@
-import { IHeaderInfo } from './common';
+import { IHeaderInfo, NAV_TYPES, INewsData } from './common';
 
 export {
-  IHeaderInfo
+  IHeaderInfo,
+  NAV_TYPES,
+  INewsData
 }

@@ -22,8 +22,6 @@ import { defineComponent, reactive, watch, toRefs } from "vue"
 import { useRoute, useRouter, RouteLocationNormalizedLoaded, Router } from "vue-router"
 import { IHeaderInfo } from '../../typings';
 import { useRouteInfo } from '../../compositions';
-import axios from '../../lib/http';
-// import axios from 'axios';
 
 export default defineComponent({
   name: 'Header',
@@ -43,14 +41,14 @@ export default defineComponent({
       rightPath: '/mynews'
     });
 
-    axios.get('/api/toutiao/index', {
-      params: {
-        key: '85ab8fe3d5736cbcd4927006b6939a48'
-      }
-    })
-    .then(res => {
-      console.log(res)
-    })
+    // axios.get('/api/toutiao/index', {
+    //   params: {
+    //     key: '85ab8fe3d5736cbcd4927006b6939a48'
+    //   }
+    // })
+    // .then(res => {
+    //   console.log(res)
+    // })
 
     // vue3 watch 第一个函数导出需要监听变化的属性 第二个函数修改
     watch( () => {
