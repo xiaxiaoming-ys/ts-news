@@ -5,11 +5,8 @@
 </template>
 
 <script lang="ts">
-// export default {
-//   name: 'Home'
-// }
 import { defineComponent, onMounted } from 'vue';
-import { getNewsList } from '../serves'
+// import { getNewsList } from '../serves'
 
 import { NAV_TYPES } from '../typings'
 
@@ -17,13 +14,13 @@ import { NAV_TYPES } from '../typings'
     name: 'Home',
     setup() {
       onMounted(async () => {
-        const data = await getNewsList({
-          type: NAV_TYPES.YULE,
-          pageNum: 1,
-          count: 5
-        })
+        // const data = await getNewsList({
+        //   type: NAV_TYPES.YULE,
+        //   pageNum: 1,
+        //   count: 5
+        // })
 
-        console.log(data)
+        // console.log(data)
       })
     }
   })

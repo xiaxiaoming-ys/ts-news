@@ -1,3 +1,4 @@
+import { INewsInfo } from '.';
 
 interface IHeaderInfo {
   name: string,
@@ -24,22 +25,20 @@ enum NAV_TYPES {
   SHISHANG = 'shishang'
 }
 
-// 新闻数据
-interface INewsData {
-  uniquekey: string,
-  title: string,
-  date: string,
-  category: string,
-  author_name: string,
-  url: string,
-  thumbnail_pic_s?: string,
-  thumbnail_pic_s02?: string,
-  thumbnail_pic_s03?: string
+interface IGetData {
+  type: NAV_TYPES,
+  pageNum: number,
+  count: number
 }
 
+interface IRetNewsData {
+  data: INewsInfo[] | null,
+  hasMore: boolean
+}
 
 export {
   IHeaderInfo,
   NAV_TYPES,
-  INewsData
+  IGetData,
+  IRetNewsData
 }
