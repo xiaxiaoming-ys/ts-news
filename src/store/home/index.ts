@@ -8,8 +8,7 @@ import mutations from './mutations';
 
 // Module 固定写法
 const homeModule: Module<IHomeState, IGlobalState> = {
-  // 开启命名空间
-  namespaced: true,
+  namespaced: true, // 开启命名空间
   state,
   actions,
   mutations

@@ -5,23 +5,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue';
-// import { getNewsList } from '../serves'
+import { useNewsList } from '@/compositions';
+import { defineComponent } from 'vue';
+import { Store, useStore } from 'vuex';
 
-import { NAV_TYPES } from '../typings'
 
   export default defineComponent({
     name: 'Home',
     setup() {
-      onMounted(async () => {
-        // const data = await getNewsList({
-        //   type: NAV_TYPES.YULE,
-        //   pageNum: 1,
-        //   count: 5
-        // })
+      const store: Store<any> = useStore();
+      const newsList = useNewsList(store)
 
-        // console.log(data)
-      })
+      console.log(newsList)
+
     }
   })
 </script>
