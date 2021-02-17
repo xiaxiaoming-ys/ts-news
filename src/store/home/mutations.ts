@@ -12,6 +12,7 @@ export default {
       state.newsList.news = [...state.newsList.news, ...payload.data!] // ! 确定payload.data有值
       state.newsList.pageNum += 1
     }
+    // console.log(payload)
 
     // 不管hasMore的是真还是假
     // 都要重新赋值state hasMore

@@ -1,5 +1,5 @@
 import axios from '../lib/http';
-import { INewsInfo, IGetData } from '@/typings/index';
+import { IRetNewsData, INewsInfo, IGetData } from '@/typings/index';
 
 const APPKEY: string = '85ab8fe3d5736cbcd4927006b6939a48';
 
@@ -12,9 +12,9 @@ function getNewsList(options: IGetData) {
       type: type
     }
   }).then((res: any) => {
-    const data = res.result.data;
-
-    return _cutNewList(data, options)
+    const newsList = res.result.data;
+    // console.log(res)
+    return _cutNewList(newsList, options)
   }).catch(err => {
     throw new Error('Request failed:' + err)
   })
@@ -26,9 +26,13 @@ export {
 }
 
 // 分割数据
-function _cutNewList<INewsInfo>(data: INewsInfo[], options: IGetData): INewsInfo[] {
+function _cutNewList(newsList: INewsInfo[], options: IGetData): IRetNewsData {
   const { pageNum, count } = options;
-  const start = pageNum == 0 ? 0 : (pageNum - 1) * count;
-
-  return data.slice(start, start + count)
+  const start = pageNum * count;
+  const data = newsList.slice(start, start + count);
+  console.log(data)
+  return {
+    data,
+    hasMore: (start + count) > 30 ? false : true
+  }
 }

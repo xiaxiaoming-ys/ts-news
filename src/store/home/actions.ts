@@ -22,7 +22,6 @@ export default {
 
     // 请求数据
     getNewsList(options).then((data) => {
-      console.log(data)
       // 去操作数据
       commit(actionTypes.SET_NEWS_LIST, data)
     }).catch((err) => {
