@@ -26,9 +26,6 @@ interface IHomeState {
   newsList: INewsList
 }
 
-
-
-
 export {
   INewsList,
   INewsInfo,

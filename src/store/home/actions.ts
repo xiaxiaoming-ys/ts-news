@@ -1,6 +1,6 @@
 import * as actionTypes from './actionType'
 import { Commit } from 'vuex'
-import { IGetData, INewsInfo, IHomeState } from '@/typings'
+import { IGetData, INewsInfo, IHomeState, NAV_TYPES } from '@/typings'
 import { getNewsList } from '@/serves'
 
 export default {
@@ -27,6 +27,10 @@ export default {
     }).catch((err: any) => {
       throw err
     })
+  },
+  // 更改新闻类型的action
+  [actionTypes.SET_CURRENT_TYPE]( { commit }: { commit: Commit }, type: NAV_TYPES ): void {
+    commit(actionTypes.SET_CURRENT_TYPE, type)
   }
 }
 // <INewsInfo[0]>

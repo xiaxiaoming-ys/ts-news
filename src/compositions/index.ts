@@ -1,7 +1,10 @@
 import { useRouteInfo } from './common'
-import { useNewsList } from './home'
+import { useNewsList, useNavType } from './home'
 
 export {
+  // common
   useRouteInfo,
-  useNewsList
+  // home
+  useNewsList,
+  useNavType
 }

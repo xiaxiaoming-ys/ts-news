@@ -15,7 +15,7 @@ import { INavBar } from "../../typings";
       index: Number
     },
     setup(props, { emit }) {
-
+      // 设置当前index值
       const setCurIndex = (type: string): void => {
         emit('setCurIndex', props.index, type)
       }

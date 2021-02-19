@@ -17,7 +17,7 @@
           @setCurIndex="setCurIndex"
         />
       </div>
-    </div>
+    </div> 
   </nav>
 </template>
 
@@ -42,10 +42,11 @@ import { navCurrent } from '../../directives'
         curIndex: 0
       })
 
-      const setCurIndex = (curIndex, type: string): void => {
+      // 设置当前 index 值
+      const setCurIndex = (curIndex: number, type: string): void => {
         state.curIndex = curIndex;
-        console.log(type)
-        // emit('SET_CURRENT_TYPE', type)
+
+        emit('setCurType', type)
       }
 
       return {

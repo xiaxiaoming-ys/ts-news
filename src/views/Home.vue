@@ -1,14 +1,15 @@
 <template>
   <div class="home">
-    <nav-bar />
+    <nav-bar @setCurType="setCurType" />
   </div>
 </template>
 
 <script lang="ts">
-import { useNewsList } from '../compositions';
-import { defineComponent } from 'vue';
+import { ComputedRef, defineComponent } from 'vue';
 import { Store, useStore } from 'vuex';
+import { useNewsList, useNavType } from '../compositions';
 import NavBar from '../components/NavBar/index.vue'
+import { INewsInfo, NAV_TYPES } from '../typings'
 
 
   export default defineComponent({
@@ -18,11 +19,17 @@ import NavBar from '../components/NavBar/index.vue'
     },
     setup() {
       const store: Store<any> = useStore();
-      // const newsList = useNewsList(store)
-      const newsList = 1;
+      // 返回列表数据 ComputedRef计算属性类型
+      const newsList: ComputedRef<INewsInfo[]> = useNewsList(store)
+      // const newsList = 1;
+
+      // 返回一个更改类型的方法 返回一个 function 给navBar 点击用
+      const setCurType: (type: NAV_TYPES) => void = useNavType(store)
+      // const setCurType = useNavType(store) // 上下等效 不带函数注解
 
       return {
-        newsList
+        newsList,
+        setCurType
       }
 
     }

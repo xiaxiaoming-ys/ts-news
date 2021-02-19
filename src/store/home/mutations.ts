@@ -1,5 +1,5 @@
 import * as actionTypes from './actionType'
-import { IHomeState, IRetNewsData } from '@/typings'
+import { IHomeState, IRetNewsData, NAV_TYPES, INewsList } from '@/typings'
 
 export default {
   [actionTypes.SET_LOADING] (state: IHomeState, isLoading: boolean) {
@@ -19,5 +19,24 @@ export default {
     state.newsList.hasMore = payload.hasMore;
     // 都要将isLoading 设置为false
     state.newsList.isLoading = false;
+  },
+
+  // 更改新闻类型的方法
+  [actionTypes.SET_CURRENT_TYPE] (state: IHomeState, type: NAV_TYPES) {
+    state.currentType = type
+
+    // 由于新闻类型改变， 所以newsList内部所有属性都要还原成默认值
+    state.newsList = <INewsList> {
+      // 是否还有更多数据
+      hasMore: true,
+      // 是否正在加载中
+      isLoading: false,
+      // 当前页码
+      pageNum: 0,
+      // 一页请求多少数据
+      count: 10,
+      // 当前的新闻列表数据
+      news: []
+    }
   }
 }
