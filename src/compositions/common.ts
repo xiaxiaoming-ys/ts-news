@@ -29,7 +29,7 @@ function useRouteInfo (routeName: string): IHeaderInfo | undefined {
 
 function useImgShow (imgRefs: Ref<null | HTMLElement>[]): void {
   imgRefs.map((imgRef) => {
-    const oImg = imgRef.value;
+    const oImg = imgRef.value!; // ! value 必须有值
 
     oImg!.onload = function () {
       oImg!.style.opacity = '1';
