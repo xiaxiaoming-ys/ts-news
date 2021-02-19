@@ -1,6 +1,10 @@
 <template>
   <div class="home">
     <nav-bar @setCurType="setCurType" />
+    <news-list
+      :newsData="newsList"
+      :top="82"
+    />
   </div>
 </template>
 
@@ -8,14 +12,17 @@
 import { ComputedRef, defineComponent } from 'vue';
 import { Store, useStore } from 'vuex';
 import { useNewsList, useNavType } from '../compositions';
-import NavBar from '../components/NavBar/index.vue'
-import { INewsInfo, NAV_TYPES } from '../typings'
+import { INewsInfo, NAV_TYPES } from '../typings';
+
+import NavBar from '../components/NavBar/index.vue';
+import NewsList from '../components/NewsList/index.vue';
 
 
   export default defineComponent({
     name: 'Home',
     components: {
-      NavBar
+      NavBar,
+      NewsList
     },
     setup() {
       const store: Store<any> = useStore();
