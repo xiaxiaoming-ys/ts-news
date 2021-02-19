@@ -27,7 +27,9 @@ function useRouteInfo (routeName: string): IHeaderInfo | undefined {
   return routeInfo
 }
 
+// 图片淡入
 function useImgShow (imgRefs: Ref<null | HTMLElement>[]): void {
+  // 收集item里的所有图片的ref， 遍历refs， 当图片加载完成后让图片透明度为1
   imgRefs.map((imgRef) => {
     const oImg = imgRef.value!; // ! value 必须有值
 

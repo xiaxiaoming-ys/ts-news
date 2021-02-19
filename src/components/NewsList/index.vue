@@ -7,34 +7,30 @@
     <template
       v-for="item of newsData"
     >
-      <NewsItem0
+      <news-item-0
         v-if="!item.thumbnail_pic_s"
         :item="item"
         :key="item.uniquekey"
         :pageFrom="pageFrom"
       />
-
-      <NewsItem1
+      <news-item-1
         v-else-if="!item.thumbnail_pic_s02"
         :item="item"
         :key="item.uniquekey"
         :pageFrom="pageFrom"
       />
-
-      <NewsItem2
-        v-if="!item.thumbnail_pic_s03"
+      <news-item-2
+        v-else-if="!item.thumbnail_pic_s03"
         :item="item"
         :key="item.uniquekey"
         :pageFrom="pageFrom"
       />
-
-      <NewsItem3
+      <news-item-3
         v-else
         :item="item"
         :key="item.uniquekey"
         :pageFrom="pageFrom"
       />
-
     </template>
 
   </div>
