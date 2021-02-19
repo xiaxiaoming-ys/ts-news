@@ -21,10 +21,10 @@ export default {
     }
 
     // 请求数据
-    getNewsList(options).then((data) => {
+    getNewsList(options).then((data: any) => {
       // 去操作数据
       commit(actionTypes.SET_NEWS_LIST, data)
-    }).catch((err) => {
+    }).catch((err: any) => {
       throw err
     })
   }

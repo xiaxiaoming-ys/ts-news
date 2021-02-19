@@ -1,36 +1,27 @@
 <template>
-  <div class="home" @click="homeClick" style="margin-top: 20px">
-    首页
-    <div class="box" v-for="item in newsList" :key="item">
-      <p>{{ item.author_name }}</p>
-      <p>{{ item.date }}</p>
-      <p>{{ item.title }}</p>
-    </div>
+  <div class="home">
+    <nav-bar />
   </div>
 </template>
 
 <script lang="ts">
-import { useNewsList } from '@/compositions';
+import { useNewsList } from '../compositions';
 import { defineComponent } from 'vue';
 import { Store, useStore } from 'vuex';
+import NavBar from '../components/NavBar/index.vue'
 
 
   export default defineComponent({
     name: 'Home',
+    components: {
+      NavBar
+    },
     setup() {
       const store: Store<any> = useStore();
-      let newsList = useNewsList(store)
-
-      const homeClick = () => {
-        newsList = useNewsList(store)
-
-        console.log(newsList)
-      }
-
-      console.log(newsList)
+      // const newsList = useNewsList(store)
+      const newsList = 1;
 
       return {
-        homeClick,
         newsList
       }
 
@@ -39,9 +30,5 @@ import { Store, useStore } from 'vuex';
 </script>
 
 <style lang="scss">
-  .box{
-    margin-top: 10px;
-    border: 1px solid #000;
-    font-size: 12px;
-  }
+
 </style>

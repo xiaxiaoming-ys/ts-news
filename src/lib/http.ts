@@ -5,7 +5,7 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 // 添加请求拦截器
 axios.interceptors.request.use(
   (config: AxiosRequestConfig) => config,
-  (err) => {
+  (err: any) => {
     console.log(err)
   }
 )
@@ -20,7 +20,7 @@ axios.interceptors.response.use(
 
     return res.data
   },
-  (err) => Promise.reject(err)
+  (err: any) => Promise.reject(err)
 )
 
 export default axios

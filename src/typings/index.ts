@@ -1,5 +1,6 @@
 import { IHeaderInfo, NAV_TYPES, IGetData, IRetNewsData } from './common';
 import { INewsList, INewsInfo, IHomeState } from './store';
+import { INavBar } from './home';
 
 export {
   // common
@@ -10,6 +11,7 @@ export {
   // store
   INewsList,
   INewsInfo,
-  IHomeState
-  
+  IHomeState,
+  // home
+  INavBar
 }

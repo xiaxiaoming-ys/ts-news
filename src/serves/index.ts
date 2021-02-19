@@ -4,7 +4,13 @@ import { IRetNewsData, INewsInfo, IGetData } from '@/typings/index';
 const APPKEY: string = '85ab8fe3d5736cbcd4927006b6939a48';
 
 function getNewsList(options: IGetData) {
-  const { type } = options
+  const { type } = options;
+
+  // if (localStorage.getItem('newsList')) {
+  //   const newsList: INewsInfo[] = JSON.parse(localStorage.getItem('newsList'));
+
+  //   return _cutNewList(newsList, options)
+  // };
 
   return axios.get('/api/toutiao/index', {
     params: {
@@ -13,9 +19,11 @@ function getNewsList(options: IGetData) {
     }
   }).then((res: any) => {
     const newsList = res.result.data;
-    // console.log(res)
+
+    localStorage.setItem('newsList', JSON.stringify(newsList))
+
     return _cutNewList(newsList, options)
-  }).catch(err => {
+  }).catch((err: string) => {
     throw new Error('Request failed:' + err)
   })
 }
