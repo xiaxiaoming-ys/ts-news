@@ -26,8 +26,13 @@ interface IHomeState {
   newsList: INewsList
 }
 
+interface IDetailState {
+  currentNews: INewsInfo
+}
+
 export {
   INewsList,
   INewsInfo,
-  IHomeState
+  IHomeState,
+  IDetailState
 }

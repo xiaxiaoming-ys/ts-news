@@ -33,6 +33,9 @@
       />
     </template>
 
+    <Loading v-if="isLoading" />
+    <NoMore v-if="!hasMore" />
+
   </div>
 </template>
 
@@ -49,6 +52,8 @@ import NewsItem0 from './Items/Item0.vue'
 import NewsItem1 from './Items/Item1.vue'
 import NewsItem2 from './Items/Item2.vue'
 import NewsItem3 from './Items/Item3.vue'
+import Loading from '../Loading/index.vue'
+import NoMore from '../NoMore/index.vue'
 
 export default defineComponent({
   name: "NewsList",
@@ -60,14 +65,16 @@ export default defineComponent({
     NewsItem0,
     NewsItem1,
     NewsItem2,
-    NewsItem3
+    NewsItem3,
+    Loading,
+    NoMore
   },
   setup() {
     const pageFrom = ref<string>('');
     const newsListRef = ref<null | HTMLElement>(null); // 括号中null 即默认值
     const route = useRoute();
     const store: Store<any> = useStore()
-
+    // 返回的isLoading, hasMore 决定loading 和 hasMore显示   加载更多  和loding
     const { isLoading, hasMore } = useLoadingMore(store, 'home', SET_NEWS_LIST, newsListRef);
 
     // pageFrom 是为了告诉详情页，在哪里获取当前的详情

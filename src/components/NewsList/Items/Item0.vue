@@ -1,6 +1,6 @@
 <template>
   <div class="news-item type-0">
-    <router-link :to="'/detail/' + item.uniquekey + '/' + pageFrom">
+    <router-link :to="'/detail/' + item.uniquekey + '/' + pageFrom + '/3333'">
       <h1>{{ item.title }}</h1>
       <div class="info">
         <span class="author">{{ item.author_name }}</span>

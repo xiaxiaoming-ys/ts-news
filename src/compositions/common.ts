@@ -66,12 +66,14 @@ function useLoadingMore(
   }
 
   onMounted(() => {
+    // 注意这里需要类型断言， 因为element类型中有null
     el = element.value as HTMLElement;
-    // 函数节流 
+    // 绑定滚动事件  使用lodash工具库中的防抖函数 debounce
     el.addEventListener('scroll', _.debounce(_loadMore, 300), false)
   })
 
   function _loadMore(): void {
+    // 拿到列表高度， 滚动高度， 滚动的top值
     const listHeight: number = el.clientHeight;
     const scrollHeight: number = el.scrollHeight;
     const scrollTop: number = el.scrollTop;
@@ -80,8 +82,7 @@ function useLoadingMore(
     const pageNum: number = computed(() => state.newsList.pageNum).value;
     const count: number = computed(() => state.newsList.count).value;
 
-
-
+    // 监听触底
     if (listHeight + scrollTop >= scrollHeight - 30) {
       store.dispatch(`${module}/${actionType}`, <IGetData>{
           type,
