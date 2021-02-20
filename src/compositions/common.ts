@@ -1,6 +1,10 @@
-import { IHeaderInfo, INewsInfo } from '@/typings';
+import { IGlobalState } from '@/store';
+import { IHeaderInfo, IHomeState, NAV_TYPES, IGetData } from '@/typings';
+import _ from 'lodash';
 import { headerInfors } from '@/router'
-import { Ref } from 'vue';
+import { Ref, onMounted, computed } from 'vue';
+import { Store } from 'vuex';
+
 
 // 通过路由name 查找出对应router object对象
 /**
@@ -39,7 +43,62 @@ function useImgShow (imgRefs: Ref<null | HTMLElement>[]): void {
   })
 }
 
+function useLoadingMore(
+  // 仓库
+  store: Store<IGlobalState>,
+  // store的模块名： home detail
+  module: string,
+  // action type module/actionType 
+  actionType: string,
+  // 元素
+  element: Ref<HTMLElement | null>,
+) {
+  let el: HTMLElement;
+  let state: IHomeState;
+
+  // 类型断言操作
+  switch (module) {
+    case 'home':
+      state = store.state.home as IHomeState;
+      break;
+    default:
+      break;
+  }
+
+  onMounted(() => {
+    el = element.value as HTMLElement;
+    // 函数节流 
+    el.addEventListener('scroll', _.debounce(_loadMore, 300), false)
+  })
+
+  function _loadMore(): void {
+    const listHeight: number = el.clientHeight;
+    const scrollHeight: number = el.scrollHeight;
+    const scrollTop: number = el.scrollTop;
+
+    const type: NAV_TYPES = computed(() => state.currentType).value;
+    const pageNum: number = computed(() => state.newsList.pageNum).value;
+    const count: number = computed(() => state.newsList.count).value;
+
+
+
+    if (listHeight + scrollTop >= scrollHeight - 30) {
+      store.dispatch(`${module}/${actionType}`, <IGetData>{
+          type,
+          pageNum,
+          count
+        })
+    }
+  }
+
+  return {
+    isLoading: computed(() => state.newsList.isLoading),
+    hasMore: computed(() => state.newsList.hasMore)
+  }
+}
+
 export {
   useRouteInfo,
-  useImgShow
+  useImgShow,
+  useLoadingMore
 }
