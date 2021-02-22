@@ -18,16 +18,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, watch, toRefs } from "vue"
+import { defineComponent, reactive, watch, toRefs, onMounted } from "vue"
+import { useStore, Store } from 'vuex'
 import { useRoute, useRouter, RouteLocationNormalizedLoaded, Router } from "vue-router"
 import { IHeaderInfo } from '../../typings';
-import { useRouteInfo } from '../../compositions';
+import { useRouteInfo, useNewsFollow, useFollowedCheck } from '../../compositions';
 
 export default defineComponent({
   name: 'Header',
   setup () {
     const route: RouteLocationNormalizedLoaded = useRoute();
     const router: Router = useRouter();
+    const store: Store<any> = useStore()
 
     // reactive 是 Vue3 中提供的实现数据响应式的方法
     const state: IHeaderInfo = reactive({
@@ -41,32 +43,44 @@ export default defineComponent({
       rightPath: '/mynews'
     });
 
-    // axios.get('/api/toutiao/index', {
-    //   params: {
-    //     key: '85ab8fe3d5736cbcd4927006b6939a48'
-    //   }
-    // })
-    // .then(res => {
-    //   console.log(res)
-    // })
-
     // vue3 watch 第一个函数导出需要监听变化的属性 第二个函数修改
     watch( () => {
+      // 监听routeName的变化
       return route.name
     }, (routeName) => {
+      // 参数变化后的值
+      // 通过变化后的routeName 去到routeInfos里招相应的header配置信息
       const routeInfo: IHeaderInfo | undefined = useRouteInfo(routeName as string)
       if (routeInfo === undefined) return;
-
+      // 将state和新的header配置信息合并
       Object.assign(state, routeInfo)
+
+      // 进入详情页面 设置收藏图标状态
+      if(routeName === 'Detail') {
+        useFollowedCheck(route, (status) => {
+        state.rightIcon = status ? 'star-full' : 'star-o';
+      })
+      }
     })
 
+    const handleFollowClick = (): void => {
+      // 执行 -> 最终执行参数中的callback
+      useNewsFollow(store, (status) => {
+        // callback 内部的status决定星星图标如何显示 详情页面收藏星星按钮star-full -> 黄色高亮  star-o-> 默认样式星星
+        state.rightIcon = status ? 'star-full' : 'star-o';
+      })
+    }
+
+    // 返回上一页
     const goBackpage = () => {
+      // console.log(route)
       router.go(-1)
     }
 
     return {
       ...toRefs(state),
-      goBackpage
+      goBackpage,
+      handleFollowClick
     }
   }
 })

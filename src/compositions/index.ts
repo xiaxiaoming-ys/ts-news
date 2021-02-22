@@ -1,5 +1,7 @@
 import { useRouteInfo, useImgShow, useLoadingMore } from './common'
 import { useNewsList, useNavType } from './home'
+import { useDetailInfo, useNewsFollow, useFollowedCheck } from './detail'
+import { useFollowedList } from './mynews'
 
 export {
   // common
@@ -8,5 +10,11 @@ export {
   useLoadingMore,
   // home
   useNewsList,
-  useNavType
+  useNavType,
+  // detail
+  useDetailInfo,
+  useNewsFollow,
+  useFollowedCheck,
+  // mynews
+  useFollowedList
 }

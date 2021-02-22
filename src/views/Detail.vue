@@ -9,7 +9,7 @@ import { defineComponent } from "vue"
 import { useStore, Store } from "vuex";
 import { useRoute, RouteLocationNormalizedLoaded, Router, useRouter } from "vue-router";
 import { INewsInfo } from "../typings"
-import { useDetailInfo } from "../compositions/detail"
+import { useDetailInfo } from "../compositions"
 
 export default defineComponent ({
   name: 'Detail',
@@ -19,9 +19,10 @@ export default defineComponent ({
     // 跳转方式
     const router: Router = useRouter();
     const store: Store<any> = useStore();
-
+    // 接收新闻详情信息 并绑定到视图
     const detailInfo: INewsInfo | undefined = useDetailInfo(store, route);
 
+    // 如果localStorage 或state里都没有取到新闻数据 则跳回首页
     if (!detailInfo) {
       router.push('/')
       return
